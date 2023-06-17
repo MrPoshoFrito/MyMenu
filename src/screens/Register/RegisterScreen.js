@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { Auth } from 'aws-amplify';
 import { styles } from "./RegisterStyles";
 
 const RegisterScreen = ({ navigation }) => {
   const goToLoginScreen = () => {
     navigation.navigate("Login");
+  };
+
+  const [given_name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleRegister = async () => {
+    if (password !== repeatPassword) {
+      setError("Las contraseñas no coinciden");
+      return;
+    }
+  
+    try {
+      const { user } = await Auth.signUp({
+        username: email,
+        password,
+        attributes: {
+          email,
+          given_name
+        }
+      });
+      console.log("User created successfully:", user);
+      navigation.navigate("Confirmation", { email });
+    } catch (error) {
+      console.log("Error signing up:", error);
+    }
   };
 
   return (
@@ -15,33 +44,37 @@ const RegisterScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Nombre"
+          value={given_name}
           placeholderTextColor="#ffffff"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Apellido"
-          placeholderTextColor="#ffffff"
-          secureTextEntry
+          onChangeText={setName}
         />
         <TextInput
           style={styles.input}
           placeholder="Correo electrónico"
+          value={email}
           placeholderTextColor="#ffffff"
+          onChangeText={setEmail}
         />
         <TextInput
           style={styles.input}
           placeholder="Contraseña"
-          placeholderTextColor="#ffffff"
           secureTextEntry
+          value={password}
+          placeholderTextColor="#ffffff"
+          onChangeText={setPassword}
         />
         <TextInput
           style={styles.input}
-          placeholder="Confirmar Contraseña"
-          placeholderTextColor="#ffffff"
+          placeholder="Repetir Contraseña"
           secureTextEntry
+          value={repeatPassword}
+          placeholderTextColor="#ffffff"
+          onChangeText={setRepeatPassword}
         />
 
-        <TouchableOpacity style={styles.buttonContainer}>
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+        <TouchableOpacity style={styles.buttonContainer} onPress={handleRegister}>
           <Text style={styles.buttonText}>Registrarse</Text>
         </TouchableOpacity>
       </View>
