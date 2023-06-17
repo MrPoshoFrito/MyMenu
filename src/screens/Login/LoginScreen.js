@@ -9,7 +9,7 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image source={require("../../../assets/quiyana.jpeg")} style={styles.image} />
+      <Image source={require("../../../assets/logo.png")} style={styles.image} />
 
       <View style={styles.inputsContainer}>
         <TextInput
