@@ -14,7 +14,7 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.inputsContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Ej: 50558169980"
+          placeholder="Ej: steven@baldelomar.com"
           placeholderTextColor="#ffffff"
           keyboardType="numeric"
         />

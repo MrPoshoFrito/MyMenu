@@ -19,12 +19,24 @@ const RegisterScreen = ({ navigation }) => {
         />
         <TextInput
           style={styles.input}
+          placeholder="Apellido"
+          placeholderTextColor="#ffffff"
+          secureTextEntry
+        />
+        <TextInput
+          style={styles.input}
           placeholder="Correo electrónico"
           placeholderTextColor="#ffffff"
         />
         <TextInput
           style={styles.input}
           placeholder="Contraseña"
+          placeholderTextColor="#ffffff"
+          secureTextEntry
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Confirmar Contraseña"
           placeholderTextColor="#ffffff"
           secureTextEntry
         />
