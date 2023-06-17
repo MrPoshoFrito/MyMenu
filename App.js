@@ -4,6 +4,7 @@ import LoginScreen from "./src/screens/Login/LoginScreen";
 import RegisterScreen from "./src/screens/Register/RegisterScreen";
 import HomeScreen from "./src/screens/Home/HomeScreen";
 import ConfirmationScreen from "./src/screens/Confirmation/ConfirmationScreen";
+import CRUDScreen from "./src/screens/CRUD/CRUDScreen.js";
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
 
@@ -19,6 +20,7 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Confirmation" component={ConfirmationScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Crud" component={CRUDScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -8,6 +8,10 @@ const RegisterScreen = ({ navigation }) => {
     navigation.navigate("Login");
   };
 
+  const goToConfirmationScreen = (user) => {
+    navigation.navigate("Confirmation", { user });
+  };
+
   const [given_name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +34,7 @@ const RegisterScreen = ({ navigation }) => {
         }
       });
       console.log("User created successfully:", user);
-      navigation.navigate("Confirmation", { email });
+      goToConfirmationScreen(user);
     } catch (error) {
       console.log("Error signing up:", error);
     }

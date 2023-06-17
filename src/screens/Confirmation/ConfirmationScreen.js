@@ -3,22 +3,20 @@ import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { Auth } from 'aws-amplify';
 import styles from "./ConfirmationStyles";
 
-const ConfirmationScreen = ({ route }) => {
+const ConfirmationScreen = ({ route, navigation }) => {
   const [confirmationCode, setConfirmationCode] = useState("");
   const [error, setError] = useState("");
   const inputsRef = useRef([]);
 
-  const { email } = route.params;
+  const { user } = route.params;
 
   const handleConfirmation = async () => {
     if (confirmationCode.length === 6) {
       try {
-        await Auth.confirmSignUp(email, confirmationCode);
+        await Auth.confirmSignUp(user.username, confirmationCode);
         console.log("User confirmed successfully");
 
-        // Perform any additional actions after successful confirmation
-
-        // If user didn't get a confirmation code, you can use resendSignUp function to send a new one.
+        navigation.navigate("Crud");
 
       } catch (error) {
         console.log("Error confirming user:", error);
